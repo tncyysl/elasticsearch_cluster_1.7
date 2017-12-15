@@ -1,0 +1,33 @@
+---
+- name: Add jdk for Elasticsearch
+  apt: name="openjdk-8-jdk" state=present
+
+- name: Download package
+  get_url: 
+    url: "{{ elasticsearch_url_name }}"
+    dest: "/tmp/"
+
+- name: Install package
+  apt: 
+    deb: "/tmp/{{ elasticsearch_version }}"
+
+- name: configure /etc/elasticsearch/elasticsearch.yml
+  template: 
+    src: elasticsearch.yml.j2         
+    dest: /etc/elasticsearch/elasticsearch.yml
+  notify:
+    - restart elasticsearch
+
+- name: configure /etc/default/elasticsearch
+  template:
+    src: elasticsearch.j2 
+    dest: /etc/default/elasticsearch        
+  notify:
+    - restart elasticsearch   
+
+- name: enable elasticsearch service
+  service: name=elasticsearch enabled=yes state=started
+
+
+
+

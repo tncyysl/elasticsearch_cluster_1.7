@@ -1,0 +1,19 @@
+---
+
+#tasks to  install
+
+elasticsearch_version: elasticsearch-1.7.3.deb
+elasticsearch_url_name: https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.3.deb
+
+#variables for template elasticsearch.yml.j2 
+
+elasticsearch_cluster_name: elasticsearch
+elasticsearch_bind_host: 0.0.0.0
+elasticsearch_http_port: 9200
+elasticsearch_network_host: localhost
+elasticsearch_node_name: node-1
+half_of_memory: "{{ (ansible_memtotal_mb / 2) | int }}"
+es_heap_size: "{{ half_of_memory }}m"
+elasticsearch_discovery_zen_ping_unicast_hosts: '["10.34.5.4", "10.34.5.3"]'
+
+
