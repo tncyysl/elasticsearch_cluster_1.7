@@ -3,6 +3,7 @@ Playbook
 ```yaml
 ---
 - hosts: google
+  gather_facts: no
   remote_user: tuncay
   become: yes
   become_user: root
